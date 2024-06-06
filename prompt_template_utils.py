@@ -45,14 +45,14 @@ def get_prompt_template(system_prompt=system_prompt, promptTemplate_type=None, h
             Context: {history} \n {context}
             User: {question}"""
 
-            prompt_template = SYSTEM_PROMPT + B_INST + instruction + ASSISTANT_INST
+            prompt_template = B_INST + SYSTEM_PROMPT + instruction + ASSISTANT_INST + E_INST # correcting order to avoid error
             prompt = PromptTemplate(input_variables=["history", "context", "question"], template=prompt_template)
         else:
             instruction = """
             Context: {context}
             User: {question}"""
 
-            prompt_template = SYSTEM_PROMPT + B_INST + instruction + ASSISTANT_INST
+            prompt_template = B_INST + SYSTEM_PROMPT + instruction + ASSISTANT_INST + E_INST # correcting order to avoid error
             prompt = PromptTemplate(input_variables=["context", "question"], template=prompt_template)
 
     elif promptTemplate_type == "mistral":
